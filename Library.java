@@ -1,10 +1,6 @@
 /* This is a stub for the Library class */
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Enumeration;
-
-import javax.sound.sampled.SourceDataLine;
 
 public class Library extends Building{
 
@@ -17,20 +13,35 @@ public class Library extends Building{
     }
 
     public void addTitle(String title) {
+      if (this.collection.containsKey(title)){
+        throw new RuntimeException("The book is already in the collection");
+      }
       this.collection.put(title, true);
     }
 
     public String removeTitle(String title) {
-      this.collection.remove(title);
+      if (this.collection.containsKey(title)){
+        this.collection.remove(title);
+      } else {
+        throw new RuntimeException("There is no book with title " + title);
+      }
       return title;
     } // return the title that we removed
 
     public void checkOut(String title) {
-      this.collection.replace(title, false);
+      if (this.collection.containsKey(title)){
+        this.collection.replace(title, false);
+      } else {
+        throw new RuntimeException("There is no book with title " + title);
+      }
     }
 
     public void returnBook(String title) {
-      this.collection.replace(title, true);
+      if (this.collection.containsKey(title)){
+        this.collection.replace(title, true);
+      } else {
+        throw new RuntimeException("There is no book with title " + title);
+      }
     }
 
     public boolean containsTitle(String title) {
@@ -52,7 +63,6 @@ public class Library extends Building{
     } // prints out the entire collection in an easy-to-read way (including checkout status)
   
     public static void main(String[] args) {
-      new Library();
     }
   
   }

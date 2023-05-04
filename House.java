@@ -5,9 +5,9 @@ public class House extends Building {
   private boolean hasDiningRoom;
 
   public House(String name, String address, int nFloors, 
-              ArrayList<String> residents, boolean hasDiningRoom) {
+               boolean hasDiningRoom) {
     super(name, address, nFloors);
-    this.residents = residents;
+    this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
     System.out.println("You have built a house: 🏠");
   }
@@ -21,16 +21,18 @@ public class House extends Building {
   }
 
   public void moveIn(String name) {
-    // int len = this.nResidents();
-    // ArrayList<String> newResidents = new ArrayList<String>(len+1);
-    // for (int i = 0; i < len+1; i++){
-    //   newResidents.add(this.residents[i]);
-    // }
+    if (this.residents.contains(name)) {
+      throw new RuntimeException("The resident has already moved in");
+    }
     this.residents.add(name);
   }
 
   public String moveOut(String name) {
-    this.residents.remove(name);
+    if (this.residents.contains(name)) {
+      this.residents.remove(name);
+    } else {
+      throw new RuntimeException("There is no resident "+ name);
+    }
     return name;
   }
 
@@ -39,7 +41,7 @@ public class House extends Building {
   }
 
   public static void main(String[] args) {
-    new House();
+  
   }
 
 }

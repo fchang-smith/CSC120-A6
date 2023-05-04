@@ -34,7 +34,7 @@ public class Cafe extends Building{
     }
 
     public static void main(String[] args) {
-        new Cafe();
+        
     }
     
     
